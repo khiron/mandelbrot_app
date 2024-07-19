@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mandelbrot-app"
+version = "0.1.0"
+description = "A simple Mandelbrot set viewer in Python using Pygame."
+authors = [
+    { name = "Richard Morris", email = "richard.morris@anu.edu.au" }
+]
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "pygame",
+    "numpy",
+    "pytest",
+]
+
+[tool.pylint.main]
+max-line-length = 100
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]

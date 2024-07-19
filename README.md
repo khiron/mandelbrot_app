@@ -1,6 +1,8 @@
 # Mandelbrot App
 A simple Mandelbrot set viewer in Python using Pygame.
 
+![Mandelbrot set](image.png)
+
 ## Overview
 This project demonstrates best practices for structuring a Python project, including proper use of virtual environments, dependencies, testing, and documentation.
 

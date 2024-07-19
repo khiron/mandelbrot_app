@@ -27,8 +27,14 @@ class Mandelbrot:
                 im = 2.0 * (y / self.height - 0.5) / self.zoom + self.offset[1]
                 c = complex(re, im)
                 m = self.mandelbrot(c)
-                color = 255 - int(m * 255 / self.max_iter)
-                self.image[y, x] = (color, color, color)
+                color = self.color_map(m)
+                self.image[y, x] = color
+
+    def color_map(self, n):
+        if n == self.max_iter:
+            return (0, 0, 0)
+        else:
+            return (n % 256, (n * 5) % 256, (n * 15) % 256)
 
     def zoom_in(self, pos, factor):
         x, y = pos

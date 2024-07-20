@@ -4,7 +4,7 @@ from mandelbrot import Mandelbrot
 # Constants
 WIDTH, HEIGHT = 800, 600
 MAX_ITER = 100
-ZOOM_FACTOR = 1.1
+ZOOM_FACTOR = 1.5
 
 def draw_buttons(screen):
     font = pygame.font.Font(None, 36)

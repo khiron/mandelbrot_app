@@ -37,6 +37,7 @@ class MandelbrotView:
                 iterations: int = self.mandelbrot_buffer.get_value(complex_number)
                 color: Tuple[int, int, int] = self.mandelbrot_buffer.mandelbrot.color_map(iterations)
                 self.image[y, x] = color
+        self.print_cache_stats()
 
     def zoom_in(self, pos: Tuple[int, int], factor: float) -> None:
         """
@@ -79,3 +80,10 @@ class MandelbrotView:
         """
         transposed_image: np.ndarray = np.transpose(self.image, (1, 0, 2))
         pygame.surfarray.blit_array(surface, transposed_image)
+
+    def print_cache_stats(self) -> None:
+        """
+        Print the cache hit and miss statistics for debugging purposes.
+        """
+        hits, misses = self.mandelbrot_buffer.get_cache_stats()
+        print(f"Cache hits: {hits}, Cache misses: {misses}")

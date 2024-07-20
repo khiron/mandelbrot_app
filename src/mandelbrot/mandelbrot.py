@@ -42,9 +42,19 @@ class Mandelbrot:
         im = 2.0 * (y / self.height - 0.5) / self.zoom + self.offset[1]
         self.offset = (re, im)
         self.zoom *= factor
+        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_WAIT)
         self.update_image()
+        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
+
+    def center_on(self, pos):
+        x, y = pos
+        re = 3.5 * (x / self.width - 0.5) / self.zoom + self.offset[0]
+        im = 2.0 * (y / self.height - 0.5) / self.zoom + self.offset[1]
+        self.offset = (re, im)
+        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_WAIT)
+        self.update_image()
+        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
 
     def draw(self, surface):
-        # Transpose the array to match surface dimensions
         transposed_image = np.transpose(self.image, (1, 0, 2))
         pygame.surfarray.blit_array(surface, transposed_image)

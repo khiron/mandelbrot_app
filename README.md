@@ -80,7 +80,7 @@ Run the application to view the Mandelbrot set.
 python run_app.py
 ```
 
-Use the mouse scroll wheel to zoom in and out of the Mandelbrot set.
+Use the mouse left click to re-center the display on a location on the screen.  Use teh zoom-in and zoom-out buttons to change the zoom.
 
 ### Testing
 

@@ -14,10 +14,17 @@ named 'buffer' will receive the object created by the 'buffer' fixture.
 @pytest.fixture(scope="module")
 def pygame_init():
     """
-    Fixture to initialize and quit Pygame for the test module.
+    Fixture to initialize and quit Pygame for all tests in this module (file)
+
+    The 'scope' parameter specifies the fixture's scope. 'module' scope means that the fixture is set up once
+    for the entire module and all the tests in this module will use the same Pygame initialization.
+
+    The 'yield' statement is used to define where execution will yield to the test to run. 
+    Code before the 'yield' statement is setup code (initializes Pygame), and code after
+    the 'yield' statement is teardown code (quits Pygame).
     """
     pygame.init()
-    yield
+    yield # the tests run in here
     pygame.quit()
 
 @pytest.fixture

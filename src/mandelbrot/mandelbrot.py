@@ -2,16 +2,37 @@ import numpy as np
 import pygame
 
 class Mandelbrot:
-    def __init__(self, width, height, max_iter):
-        self.width = width
-        self.height = height
-        self.max_iter = max_iter
-        self.zoom = 1.0
-        self.offset = (-0.5, 0.0)
-        self.image = None
-        self.update_image()
+    """
+    The Mandelbrot class handles the calculation of whether a given point in the complex plane
+    belongs to the Mandelbrot set. The Mandelbrot set is a set of complex numbers for which
+    the function f_c(z) = z^2 + c does not diverge when iterated from z = 0.
 
-    def mandelbrot(self, c):
+    The complex plane is a way to represent complex numbers graphically. The x-axis represents
+    the real part of the complex number, and the y-axis represents the imaginary part.
+
+    The Mandelbrot set is fascinating because it produces a complex fractal structure from a
+    seemingly simple function. As you zoom into the Mandelbrot set, you see an infinite amount
+    of detail, and the boundary of the set exhibits self-similarity, where smaller parts resemble
+    the whole structure.
+
+    Attributes:
+        max_iter (int): The maximum number of iterations to determine if a point is in the set.
+    """
+
+    def __init__(self, max_iter):
+        self.max_iter = max_iter
+
+    def calculate(self, c):
+        """
+        Calculate the number of iterations for a given complex number c to determine if it
+        belongs to the Mandelbrot set.
+
+        Args:
+            c (complex): The complex number to check.
+
+        Returns:
+            int: The number of iterations before the function diverges or max_iter if it doesn't.
+        """
         z = 0
         n = 0
         while abs(z) <= 2 and n < self.max_iter:
@@ -19,42 +40,17 @@ class Mandelbrot:
             n += 1
         return n
 
-    def update_image(self):
-        self.image = np.zeros((self.height, self.width, 3), dtype=np.uint8)
-        for x in range(self.width):
-            for y in range(self.height):
-                re = 3.5 * (x / self.width - 0.5) / self.zoom + self.offset[0]
-                im = 2.0 * (y / self.height - 0.5) / self.zoom + self.offset[1]
-                c = complex(re, im)
-                m = self.mandelbrot(c)
-                color = self.color_map(m)
-                self.image[y, x] = color
-
     def color_map(self, n):
+        """
+        Map the number of iterations to a color.
+
+        Args:
+            n (int): The number of iterations.
+
+        Returns:
+            tuple: A tuple representing an RGB color.
+        """
         if n == self.max_iter:
-            return (0, 0, 0)
+            return (0, 0, 0)  # Inside the Mandelbrot set
         else:
-            return (n % 256, (n * 5) % 256, (n * 15) % 256)
-
-    def zoom_in(self, pos, factor):
-        x, y = pos
-        re = 3.5 * (x / self.width - 0.5) / self.zoom + self.offset[0]
-        im = 2.0 * (y / self.height - 0.5) / self.zoom + self.offset[1]
-        self.offset = (re, im)
-        self.zoom *= factor
-        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_WAIT)
-        self.update_image()
-        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
-
-    def center_on(self, pos):
-        x, y = pos
-        re = 3.5 * (x / self.width - 0.5) / self.zoom + self.offset[0]
-        im = 2.0 * (y / self.height - 0.5) / self.zoom + self.offset[1]
-        self.offset = (re, im)
-        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_WAIT)
-        self.update_image()
-        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
-
-    def draw(self, surface):
-        transposed_image = np.transpose(self.image, (1, 0, 2))
-        pygame.surfarray.blit_array(surface, transposed_image)
+            return (255 - n % 256, 255 - (n * 5) % 256, 255 - (n * 15) % 256)  # Color gradient

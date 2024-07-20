@@ -48,17 +48,17 @@ def main() -> None:
     pygame.init()
     
     # Set up the display
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    screen: pygame.Surface = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption('Mandelbrot Set')
     
     # Create a clock object to manage the frame rate
-    clock = pygame.time.Clock()
+    clock: pygame.time.Clock = pygame.time.Clock()
     
     # Create an instance of the MandelbrotView class
-    mandelbrot_view = MandelbrotView(WIDTH, HEIGHT, MAX_ITER)
+    mandelbrot_view: MandelbrotView = MandelbrotView(WIDTH, HEIGHT, MAX_ITER)
     
     # Main loop
-    running = True
+    running: bool = True
     while running:
         # Fill the screen with a black background
         screen.fill((0, 0, 0))
@@ -71,7 +71,7 @@ def main() -> None:
         pygame.display.flip()
         
         # Get the current mouse position
-        mouse_pos = pygame.mouse.get_pos()
+        mouse_pos: Tuple[int, int] = pygame.mouse.get_pos()
         
         # Change the cursor based on its position
         if zoom_in_rect.collidepoint(mouse_pos) or zoom_out_rect.collidepoint(mouse_pos):

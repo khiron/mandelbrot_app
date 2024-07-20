@@ -1,5 +1,5 @@
 import numpy as np
-import pygame
+from typing import Tuple
 
 class Mandelbrot:
     """
@@ -19,10 +19,10 @@ class Mandelbrot:
         max_iter (int): The maximum number of iterations to determine if a point is in the set.
     """
 
-    def __init__(self, max_iter):
-        self.max_iter = max_iter
+    def __init__(self, max_iter: int):
+        self.max_iter: int = max_iter
 
-    def calculate(self, c):
+    def calculate(self, c: complex) -> int:
         """
         Calculate the number of iterations for a given complex number c to determine if it
         belongs to the Mandelbrot set.
@@ -33,14 +33,14 @@ class Mandelbrot:
         Returns:
             int: The number of iterations before the function diverges or max_iter if it doesn't.
         """
-        z = 0
-        n = 0
+        z: complex = 0
+        n: int = 0
         while abs(z) <= 2 and n < self.max_iter:
             z = z*z + c
             n += 1
         return n
 
-    def color_map(self, n):
+    def color_map(self, n: int) -> Tuple[int, int, int]:
         """
         Map the number of iterations to a color.
 
@@ -48,7 +48,7 @@ class Mandelbrot:
             n (int): The number of iterations.
 
         Returns:
-            tuple: A tuple representing an RGB color.
+            Tuple[int, int, int]: A tuple representing an RGB color.
         """
         if n == self.max_iter:
             return (0, 0, 0)  # Inside the Mandelbrot set

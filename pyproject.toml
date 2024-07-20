@@ -15,6 +15,7 @@ dependencies = [
     "pygame",
     "numpy",
     "pytest",
+    "typing"
 ]
 
 [tool.pylint.main]

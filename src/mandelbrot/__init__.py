@@ -2,6 +2,7 @@
 # Then we can `import mandelbrot` and call it's main() function from any other python app
 # including a python script like run_app.py
 
-from .mandelbrot import Mandelbrot
 from .main import main
+from .mandelbrot import Mandelbrot
 from .mandelbrot_buffer import MandelbrotBuffer
+from .mandelbrot_view import MandelbrotView

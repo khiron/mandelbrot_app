@@ -1,7 +1,12 @@
-# Mandelbrot App
-A simple Mandelbrot set viewer in Python using Pygame.
+# Mandelbrot Set Visualization
+
+This project visualizes the Mandelbrot set using Pygame. It allows zooming and panning to explore the fractal in detail.
 
 ![Mandelbrot set](image-2.png)
+
+## Description
+
+The Mandelbrot set is a set of complex numbers for which the function `f_c(z) = z^2 + c` does not diverge when iterated from `z = 0`. This project visualizes the Mandelbrot set and allows users to zoom in and out and explore the fractal in detail.
 
 ## Overview
 This project demonstrates best practices for structuring a Python project, including proper use of virtual environments, dependencies, testing, and documentation.
@@ -10,17 +15,22 @@ This project demonstrates best practices for structuring a Python project, inclu
 
 ```
 mandelbrot_app/
+│
 ├── src/
-│ └── mandelbrot/
-│ ├── init.py # Initializes the mandelbrot package
-│ ├── main.py # Main application entry point
-│ ├── mandelbrot.py # Mandelbrot set calculation and rendering logic
-├── tests/
-│ ├── init.py # Initializes the tests package
-│ ├── test_mandelbrot.py # Test cases for the Mandelbrot class
-├── pyproject.toml # Project metadata and dependencies
-├── README.md # Project documentation
-└── run_app.py # Script to run the application
+│   ├── mandelbrot.py           # Contains the Mandelbrot class for calculation
+│   ├── mandelbrot_buffer.py    # Contains the MandelbrotBuffer class for managing the display and caching
+│   ├── main.py                 # Main entry point for the application
+│
+├── tests/                      # Contains test cases for the application
+│   ├── test_mandelbrot.py
+│
+├── .venv/                      # Virtual environment directory (not included in version control)
+│
+├── README.md                   # This readme file
+│
+├── pyproject.toml              # Project metadata and dependencies
+│
+└── run_app.py                  # Script to run the application
 ```
 
 ### File Descriptions
@@ -59,8 +69,8 @@ cd mandelbrot_app
 Create a virtual environment to manage your project's dependencies.
 
 ```python 
-python -m venv venv
-source venv/bin/activate # On Windows use venv\Scripts\activate
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 ```
 
 ### Install the Project in Editable Mode
